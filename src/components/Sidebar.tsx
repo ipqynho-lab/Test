@@ -901,7 +901,6 @@ export function Sidebar({ isOpen, onClose, state, updateState, clearChat }: Side
                     Voltar
                   </button>
                 </div>
-              </div>
             ) : (
               <div className="space-y-4">
                 <div className="bg-zinc-900 p-3 rounded-lg border border-zinc-800">
@@ -993,7 +992,8 @@ export function Sidebar({ isOpen, onClose, state, updateState, clearChat }: Side
                   )}
                 </div>
               </div>
-            )}
+              </div>
+            ) : null}
           </section>
         )}
 
@@ -1290,6 +1290,7 @@ export function Sidebar({ isOpen, onClose, state, updateState, clearChat }: Side
             </div>
 
             {state.settings.apiType === "gemini" ? (
+              <>
               <div>
                 <label className="block text-xs mb-1 text-zinc-400">Modelo</label>
                 {!isCustomModel ? (
@@ -1331,6 +1332,17 @@ export function Sidebar({ isOpen, onClose, state, updateState, clearChat }: Side
                   </div>
                 )}
               </div>
+              <div className="mt-3">
+                <label className="block text-xs mb-1 text-zinc-400">Chave de API Gemini (Opcional se hospedado no AI Studio)</label>
+                <input 
+                  type="password" 
+                  placeholder="AIzaSy..."
+                  className="w-full bg-zinc-950 border border-zinc-800 rounded px-2 py-1.5 text-sm text-white focus:border-blue-500 outline-none"
+                  value={state.settings.geminiKey || ""}
+                  onChange={(e) => updateState({ settings: { ...state.settings, geminiKey: e.target.value }})}
+                />
+              </div>
+              </>
             ) : (
               <div>
                 <label className="block text-xs mb-1 text-zinc-400">Kobold URL</label>

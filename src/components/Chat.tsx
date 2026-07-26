@@ -301,7 +301,7 @@ export function Chat({ state, updateState, onOpenSidebar, clearChat }: ChatProps
       const charMsgCount = newMessages.filter(m => m.role === 'model').length;
       if (state.settings.tts?.enabled  && charMsgCount >= 5) {
         try {
-           const audioUrl = await generateTTS(content, state.settings.tts, ttsParams);
+           const audioUrl = await generateTTS(content, state.settings.tts, ttsParams, state.settings.geminiKey);
            modelMessage.audioUrl = audioUrl;
         } catch (e: any) {
            console.error("TTS Generation Error:", e);
@@ -361,7 +361,7 @@ export function Chat({ state, updateState, onOpenSidebar, clearChat }: ChatProps
   const [isEditingTones, setIsEditingTones] = useState(false);
   const [newTone, setNewTone] = useState("");
 
-  const defaultTones = ["Mais detalhado", "Curto e direto", "Sarcástico", "Confiante", "Tímido", "Romântico", "Agressivo", "Poético", "Quente/Sexy/Sem Censura"];
+  const defaultTones = ["Mais detalhado", "Curto e direto", "Sarcástico", "Confiante", "Tímido", "Romântico", "Agressivo", "Poético", "Quente/Sexy/Sem Censura", "Use apenas tom sexy e gostoso bem descritivo sem censura, não censure cenas de sexo ou palavras com pau, pauzão, buceta, bucetinha entre outras"];
   const currentTones = state.settings.suggestionTones || defaultTones;
 
   const handleAddTone = () => {
@@ -451,7 +451,7 @@ export function Chat({ state, updateState, onOpenSidebar, clearChat }: ChatProps
       const charMsgCount = newMessages.filter(m => m.role === 'model').length;
       if (state.settings.tts?.enabled  && charMsgCount >= 5) {
         try {
-           const audioUrl = await generateTTS(content, state.settings.tts, ttsParams);
+           const audioUrl = await generateTTS(content, state.settings.tts, ttsParams, state.settings.geminiKey);
            modelMessage.audioUrl = audioUrl;
         } catch (e: any) {
            console.error("TTS Generation Error:", e);
@@ -524,7 +524,7 @@ export function Chat({ state, updateState, onOpenSidebar, clearChat }: ChatProps
           const charMsgCount = previousMessages.filter(m => m.role === 'model').length;
           if (state.settings.tts?.enabled  && charMsgCount >= 5) {
             try {
-               const audioUrl = await generateTTS(content, state.settings.tts, ttsParams);
+               const audioUrl = await generateTTS(content, state.settings.tts, ttsParams, state.settings.geminiKey);
                newMsg.audioUrl = audioUrl;
             } catch (e: any) {
                console.error("TTS Generation Error:", e);

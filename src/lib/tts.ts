@@ -62,9 +62,9 @@ function convertToWav(audioData: Uint8Array, mimeType: string): Uint8Array {
   return audioBuffer;
 }
 
-export async function generateTTS(text: string, settings: TTSSettings, ttsParams?: Record<string, string>): Promise<string> {
-  if (!text) throw new Error("No text provided for TTS");
 
+export async function generateTTS(text: string, settings: TTSSettings, ttsParams?: Record<string, string>, apiKey?: string): Promise<string> {
+  if (!text) throw new Error("No text provided for TTS");
   const modelName = settings.model || "gemini-3.1-flash-tts-preview";
   let finalText = text;
   
@@ -81,7 +81,8 @@ export async function generateTTS(text: string, settings: TTSSettings, ttsParams
     body: JSON.stringify({
       text: finalText,
       model: modelName,
-      voice: settings.voice || "Puck"
+      voice: settings.voice || "Puck",
+      apiKey: apiKey
     })
   });
 

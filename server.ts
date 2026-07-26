@@ -114,8 +114,8 @@ async function startServer() {
   // API Route for TTS
   app.post("/api/tts", async (req, res) => {
     try {
-      const { text, model, voice } = req.body;
-      const apiKey = process.env.GEMINI_API_KEY;
+      const { text, model, voice, apiKey: clientApiKey } = req.body;
+      const apiKey = clientApiKey || process.env.GEMINI_API_KEY;
       
       if (!apiKey) {
         return res.status(500).json({ error: "GEMINI_API_KEY environment variable is missing" });

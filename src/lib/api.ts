@@ -65,7 +65,8 @@ export const generateResponse = async (state: AppState, forceTargetName?: string
         temperature: settings.temperature ?? 0.9,
         maxTokens: settings.maxTokens > 0 ? settings.maxTokens : undefined,
         thinkingLevel: isGemma ? undefined : settings.thinkingLevel,
-        safetySettings: settings.safetySettings
+        safetySettings: settings.safetySettings,
+        apiKey: settings.geminiKey
       })
     });
 
@@ -234,6 +235,7 @@ IMPORTANTE: VOCÊ DEVE SEMPRE RESPONDER EXCLUSIVAMENTE EM PORTUGUÊS DO BRASIL (
         systemInstruction: systemInstruction,
         temperature: 0.7,
         maxTokens: 1024,
+        apiKey: settings.geminiKey
       })
     });
 
@@ -290,7 +292,8 @@ Forneça um resumo conciso da situação atual e dos eventos passados importante
           messages: [{ role: "user", content: prompt }],
           systemInstruction: "You are a helpful assistant that summarizes roleplay text.",
           temperature: 0.5,
-          safetySettings: settings.safetySettings
+          safetySettings: settings.safetySettings,
+          apiKey: settings.geminiKey
         })
       });
       
@@ -346,7 +349,8 @@ Escreva APENAS a resposta final do usuário em primeira pessoa (ou da perspectiv
         model: modelName,
         messages: [{ role: "user", content: prompt }],
         systemInstruction: systemInstruction,
-        temperature: 0.95
+        temperature: 0.95,
+        apiKey: settings.geminiKey
       })
     });
     
